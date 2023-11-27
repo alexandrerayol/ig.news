@@ -1,4 +1,5 @@
 import styles from './styles.module.scss'
+import { SingInButton } from '../singInButton'
 export function Header(){
     return(
         <header className={styles.header}>
@@ -10,11 +11,8 @@ export function Header(){
                         <a>Posts</a>
                     </nav>
                 </div>
-                <div className={styles.button_container}>
-                    <button type='button'>
-                        <img src="/imagens/Github-icon.svg" alt="github icon" />
-                        <span>Sing in with GitHub</span>
-                    </button>
+                <div>
+                    <SingInButton />
                 </div>
             </div>
         </header>

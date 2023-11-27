@@ -1,0 +1,27 @@
+.singInButton{
+        height: 3rem;
+        padding: 0 1.5rem;
+        background-color: #1F2729;
+        border: 0;
+        border-radius: 3rem;
+
+        color: var(--white);
+        font-weight: bold;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        transition: filter .4s ease;
+        
+        img{
+            width: 24px;
+            height: 24px;
+        }
+
+        &:hover{
+            filter: brightness(.75);
+        }
+}
+
