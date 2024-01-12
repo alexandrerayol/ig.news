@@ -1,4 +1,4 @@
-'use client'
+'use client' //cliente-side-rendering
 import styles from './styles.module.scss'
 import { signIn, useSession, signOut } from 'next-auth/react'
 

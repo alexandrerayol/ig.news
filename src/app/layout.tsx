@@ -3,6 +3,7 @@ import { Roboto, Pacifico} from 'next/font/google'
 import { NextAuthSessionProvider } from '../providers/sessionProvider';
 
 import '../styles/globals.scss'
+import { Header } from '../components/header';
 
 const roboto = Roboto({
   weight: ["400", "500", "700", "900"],
@@ -27,6 +28,7 @@ export default function RootLayout({children,}:{children: React.ReactNode}) {
 
       <body className={roboto.className}>
         <NextAuthSessionProvider>
+          <Header/>
           {children}
         </NextAuthSessionProvider>
       </body>

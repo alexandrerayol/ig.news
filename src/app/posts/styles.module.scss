@@ -1,0 +1,47 @@
+.container{
+    max-width: 728px;
+    margin: 0 auto;
+}
+
+.postsList{
+    width: 100%;
+    padding: 6rem 0;
+    margin: 0 auto;
+}
+
+.link{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+
+    & + &{
+        border-top: 1px solid var(--grey-700);
+        margin-top: 2rem;
+        padding-top: 2rem;
+    }
+
+    time{
+        margin-bottom: 1rem;
+        color: var(--grey-300);
+    }
+
+    span{
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 2.25rem;
+        color: var(--white);
+        transition: color .3s ease;
+    }
+
+    p{
+        color: var(--grey-300);
+        line-height: 1.625rem;
+    }
+
+}
+
+.title:hover{
+    color: var(--yellow-500);
+}
