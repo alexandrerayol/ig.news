@@ -14,21 +14,18 @@ interface PostProps {
 export default async function Post({ params }:PostProps){
 
     const session = await getServerSession(nextAuthOptions) //auterado em api/auth/[...nextauth]/route.ts
-    //session.subscribeStatus active or undefined
+    //session.subscribeStatus active or ''
 
-    //validação usuário não autenticado
-    if(!session){
-         redirect('/')
-    }
-    
-    //validação usuário autenticado porém sem inscrição ativa.
-    if(session?.subscriptionStatus !== 'active'){
-        redirect('/preview')
+    if(!session || session.subscriptionStatus !== 'active'){
+        redirect(`/posts/preview/${params.slug}`)
     }
 
+
+    //O bloco try Catch serve para caso a requisição de post retorne um erro ou não exista.
+    //dessa forma, impedimos que qualquer usuário fique interagindo com as rotas dinamicas.
     try{
         const prismic = createClient()
-        const postResponse = (await prismic.getByUID('post', params.slug))
+        const postResponse = await prismic.getByUID('post', params.slug)
 
         const post = {
             slug: postResponse.uid,
@@ -38,11 +35,11 @@ export default async function Post({ params }:PostProps){
         }
 
         return(
-            <div className={styles.container}>
+            <article className={styles.container}>
                 <h1 className={styles.title}>{post.title}</h1>
                 <time>{post.updatedAt}</time>
                 <div className={styles.content} dangerouslySetInnerHTML={{__html: post.content}}></div>
-            </div>
+            </article>
         )
     }catch{
         return(

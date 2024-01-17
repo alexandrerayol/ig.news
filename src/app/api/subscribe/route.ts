@@ -1,14 +1,11 @@
 import { stripe } from "@/src/services/stripe";
-import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { nextAuthOptions } from "../auth/[...nextauth]/route";
 import {collection, query, where, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from "@/src/services/firebase";
 
 
-export async function POST(req: NextApiRequest, res: NextApiResponse){
-    
-    if(req.method === 'POST'){
+export async function POST(){
 
         //pega informações sobre o usuário logado
         const session = await getServerSession(nextAuthOptions);
@@ -21,7 +18,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse){
         const querySnapshot = await getDocs(userRef);
 
         querySnapshot.forEach((doc) => {
-            firebaseUserId = doc.id;
+            firebaseUserId = doc.id; //captura o id do documento referente ao email autenticado no momento.
             stripeCustomerid = doc.data().stripe_customer_id;
           });
 
@@ -36,6 +33,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse){
                 stripe_customer_id: stripeCustomer.id
             })
 
+            //stripeCustomerid deixa de ser vazio para ter um valor. 
             stripeCustomerid = stripeCustomer.id;
         }
         
@@ -44,7 +42,6 @@ export async function POST(req: NextApiRequest, res: NextApiResponse){
         const stripeCheckoutSession = await stripe.checkout.sessions.create({
             customer: stripeCustomerid,
             payment_method_types: ['card'],
-            billing_address_collection: 'required',
             line_items: [{
                 price: 'price_1ODG4DCWzqMkMSNRGKyvn0me',
                 quantity: 1
@@ -57,8 +54,4 @@ export async function POST(req: NextApiRequest, res: NextApiResponse){
 
 
         return Response.json({sessionId: stripeCheckoutSession.id})
-    }else{
-        res.setHeader('Allow', 'POST')
-        res.status(405).end('Method not allowed')
-    }
 }

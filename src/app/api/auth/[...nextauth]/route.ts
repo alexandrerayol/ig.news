@@ -35,15 +35,15 @@ const nextAuthOptions: NextAuthOptions ={
             }catch{
                 return {
                     ...session,
-                    subscriptionStatus : null
+                    subscriptionStatus : ''
                 }
             }
         },
 
 
         async signIn({user}){
-            const q = query(collection(db, "users"), where("email", "==", user.email));
-            const querySnapshot = await getDocs(q);
+            const userRef = query(collection(db, "users"), where("email", "==", user.email));
+            const querySnapshot = await getDocs(userRef);
 
             if(!querySnapshot.empty){
                 return true;
@@ -51,8 +51,9 @@ const nextAuthOptions: NextAuthOptions ={
                 const docRef = await addDoc(collection(db, "users"), {
                     email: user.email
                 })
+                return true;
             }
-            return true;
+            
         },
       },
 }

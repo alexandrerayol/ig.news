@@ -18,7 +18,7 @@ export default async function Posts(){
         {
             slug: post.uid,
             title: asText(post.data.title), //asText converte o titulo de forma direta para string
-            summary: post.data.content.find( contentItem => contentItem.type === 'paragraph')?.text ?? '',
+            summary: post.data.content.find( postContent => postContent.type === 'paragraph')?.text ?? '',
             updatedAt: new Date(post.last_publication_date).toLocaleDateString('pt-BR', {
                         day: '2-digit',
                         month: 'long',
