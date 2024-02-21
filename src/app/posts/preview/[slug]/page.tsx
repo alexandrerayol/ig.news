@@ -1,4 +1,4 @@
-import { nextAuthOptions } from "@/src/app/api/auth/[...nextauth]/route";
+import { nextAuthOptions } from "@/src/app/api/auth/[...nextauth]/authOptions";
 import { createClient } from "@/prismicio"
 import { RichTextField, asHTML, asText } from "@prismicio/client"
 import { getServerSession } from "next-auth";
