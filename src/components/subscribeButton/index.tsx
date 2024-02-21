@@ -23,9 +23,9 @@ export function SubscribeButton({priceId}:SubscribeButtonProps){
             console.log(session.data?.subscriptionStatus)
             router.push('/posts')
         }
-        
+        //   /api/subscribe
         try{
-            const response = await fetch('http://localhost:3000/api/subscribe', {
+            const response = await fetch(new URL('/api/subscribe', process.env.BASE_URL), {
                 method: 'POST',
             })
             const data = await response.json(); //recebe session
