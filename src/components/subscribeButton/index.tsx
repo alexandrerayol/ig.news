@@ -16,11 +16,13 @@ export function SubscribeButton({priceId}:SubscribeButtonProps){
         //valida autenticação / next auth
         if(session.status !== 'authenticated'){
             await signIn('github');
+            return;
         }
 
         //valida inscrição ativa / next auth
         if(session.data.subscriptionStatus === 'active'){
             router.push('/posts')
+            return;
         }
         try{
             const baseurl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://ig-news-psi-ruby.vercel.app'
