@@ -20,7 +20,6 @@ export function SubscribeButton({priceId}:SubscribeButtonProps){
 
         //valida inscrição ativa / next auth
         if(session.data.subscriptionStatus === 'active'){
-            console.log(session.data?.subscriptionStatus)
             router.push('/posts')
         }
         try{

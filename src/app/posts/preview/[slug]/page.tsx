@@ -35,8 +35,6 @@ export default async function Preview({ params }: PreviewProps) {
             })
         }
 
-        console.log(postResponse.data.content)
-
         return (
             <article className={styles.container}>
                 <div className={styles.postPreview}>
