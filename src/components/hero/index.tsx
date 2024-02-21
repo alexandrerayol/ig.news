@@ -2,7 +2,9 @@ import styles from './styles.module.scss'
 import { SubscribeButton } from '../subscribeButton';
 
 export async function Hero(){
-    const response = await fetch(new URL('/api/product', process.env.BASE_URL), {
+    const url = new URL('/api/product', process.env.BASE_URL)
+    
+    const response = await fetch(url.toString(), {
         next: {
             revalidate: 86400 //24h
         }

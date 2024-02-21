@@ -25,7 +25,8 @@ export function SubscribeButton({priceId}:SubscribeButtonProps){
         }
         //   /api/subscribe
         try{
-            const response = await fetch(new URL('/api/subscribe', process.env.BASE_URL), {
+            const url = new URL('/api/subscribe', process.env.BASE_URL)
+            const response = await fetch(url.toString(), {
                 method: 'POST',
             })
             const data = await response.json(); //recebe session
