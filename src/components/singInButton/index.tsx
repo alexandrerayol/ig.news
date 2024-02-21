@@ -14,7 +14,7 @@ export function SingInButton(){
         >
         <img src="/imagens/Github-logged-icon.svg" alt="github icon" />
         <span>{session.user?.name}</span>
-        <img src="/Imagens/close-icon.svg" alt="close icon" />
+        <img src="/imagens/close-icon.svg" alt="close icon" />
         </button>
     ) 
     :
