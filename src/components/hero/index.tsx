@@ -2,9 +2,9 @@ import styles from './styles.module.scss'
 import { SubscribeButton } from '../subscribeButton';
 
 export async function Hero(){
-    const url = new URL('/api/product', process.env.BASE_URL)
+    const baseurl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://ig-news-psi-ruby.vercel.app'
     
-    const response = await fetch(url.toString(), {
+    const response = await fetch(`${baseurl}/api/product`, {
         next: {
             revalidate: 86400 //24h
         }

@@ -48,8 +48,8 @@ export async function POST(){
             }],
             mode: 'subscription',
             allow_promotion_codes: true,
-            success_url: process.env.STRIPE_SUCESS_URL,
-            cancel_url: process.env.STRIPE_CANCEL_URL
+            success_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/posts' : 'https://ig-news-psi-ruby.vercel.app/posts',
+            cancel_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : 'https://ig-news-psi-ruby.vercel.app/'
         })
 
 

@@ -23,10 +23,9 @@ export function SubscribeButton({priceId}:SubscribeButtonProps){
             console.log(session.data?.subscriptionStatus)
             router.push('/posts')
         }
-        //   /api/subscribe
         try{
-            const url = new URL('/api/subscribe', process.env.BASE_URL)
-            const response = await fetch(url.toString(), {
+            const baseurl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://ig-news-psi-ruby.vercel.app'
+            const response = await fetch(`${baseurl}/api/subscribe`, {
                 method: 'POST',
             })
             const data = await response.json(); //recebe session
