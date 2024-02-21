@@ -1,4 +1,4 @@
-import { createClient } from "@/src/prismicio"
+import { createClient } from "@/prismicio"
 import { asText } from "@prismicio/client"
 import Link from "next/link"
 

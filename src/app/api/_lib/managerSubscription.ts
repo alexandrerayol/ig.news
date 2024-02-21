@@ -12,7 +12,6 @@ export async function saveSubscription(
     const userRef = query(collection(db, "users"), where("stripe_customer_id", "==", customerId))
     const querySnapshot = await getDocs(userRef);
 
-    let documentId = ""
     const subscription = await stripe.subscriptions.retrieve(subscriptionId);
 
     const subscriptionData = {
@@ -25,10 +24,12 @@ export async function saveSubscription(
     if(querySnapshot.empty){
         throw new Error('querysnapshot is empty')
     }else{
+        let documentId = ""
         querySnapshot.forEach((doc) => {
             documentId = doc.id;
         })
-    
+        
+        //se existir é atualizado, se não existir é criado. 
         await updateDoc(doc(db, "users", documentId), {
             stripe_subscription_data: subscriptionData
         })

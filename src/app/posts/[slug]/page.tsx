@@ -1,4 +1,4 @@
-import { createClient } from "@/src/prismicio";
+import { createClient } from "@/prismicio";
 import { asText, asHTML } from "@prismicio/client";
 import { getServerSession } from "next-auth";
 import { nextAuthOptions } from "../../api/auth/[...nextauth]/route";
@@ -14,7 +14,6 @@ interface PostProps {
 export default async function Post({ params }:PostProps){
 
     const session = await getServerSession(nextAuthOptions) //auterado em api/auth/[...nextauth]/route.ts
-    //session.subscribeStatus active or ''
 
     if(!session || session.subscriptionStatus !== 'active'){
         redirect(`/posts/preview/${params.slug}`)

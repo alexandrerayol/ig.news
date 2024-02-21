@@ -16,7 +16,6 @@ const nextAuthOptions: NextAuthOptions ={
         //Função para alterar as propriedades de retorno de useSession(), getSession() e getServerSession()
         //buscamos no banco de dados a propriedade status de inscrição
         //caso não exista ou retorne um erro, a propriedade session padrão é retornada e o status é null
-        //no componente subscribeButton está dando erro de tipos mas está funcinando.
         async session({session}) {
 
             try{
@@ -40,8 +39,8 @@ const nextAuthOptions: NextAuthOptions ={
             }
         },
 
-
         async signIn({user}){
+            //verifica se o usuário recém autenticado possui registro no BD
             const userRef = query(collection(db, "users"), where("email", "==", user.email));
             const querySnapshot = await getDocs(userRef);
 

@@ -48,7 +48,7 @@ export async function POST(req: Request) {
 
           case 'checkout.session.completed':
             const checkoutSession = event.data.object as Stripe.Checkout.Session;
-            await saveSubscription( checkoutSession.subscription?.toString() || "", checkoutSession.customer?.toString() || "")
+            await saveSubscription( checkoutSession.subscription?.toString() as string, checkoutSession.customer?.toString() as string)
             break;
 
           default: 
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     //retorno caso o bloco try não funcione.
     return NextResponse.json(
       {
-        message: "Aconteceu algo de errado!",
+        message: "falha ao finalizar sessão no stripe",
         ok: false,
       },
       { status: 500 }
