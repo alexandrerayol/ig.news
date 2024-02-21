@@ -14,7 +14,7 @@ interface PreviewProps {
 export default async function Preview({ params }: PreviewProps) {
 
     //validação caso o usuário esteja autenticado + inscrição ativa.
-    const session = await getServerSession(nextAuthOptions)
+    const session:any = await getServerSession(nextAuthOptions)
 
     if (session && session.subscriptionStatus === 'active') {
         redirect(`/posts/${params.slug}`)

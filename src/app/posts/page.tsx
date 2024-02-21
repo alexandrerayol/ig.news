@@ -1,5 +1,5 @@
 import { createClient } from "@/prismicio"
-import { asText } from "@prismicio/client"
+import { asText,  } from "@prismicio/client"
 import Link from "next/link"
 
 import styles from './styles.module.scss';
@@ -8,17 +8,14 @@ import { Suspense } from "react";
 export default async function Posts(){
     //Busca de dados
     const prismic = createClient()
-    const postsResponse = await prismic.getAllByType("post")
-
-    //Formatação dos dados retornados
-    //para cada item dentro de postsResponse é criado um objeto com todos os dados já formatados
-    //cada objeto criado pelo map é armazenado em um array chamado posts
+    const postsResponse = await prismic.getAllByType("post") 
+    //trocar por prismic.getAllbyType("summary")
 
     const posts = postsResponse.map( post => (
         {
             slug: post.uid,
             title: asText(post.data.title), //asText converte o titulo de forma direta para string
-            summary: post.data.content.find( postContent => postContent.type === 'paragraph')?.text ?? '',
+            summary: '', 
             updatedAt: new Date(post.last_publication_date).toLocaleDateString('pt-BR', {
                         day: '2-digit',
                         month: 'long',
