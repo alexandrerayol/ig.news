@@ -3,7 +3,7 @@ import {collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { db } from "@/src/services/firebase";
 import { NextAuthOptions } from "next-auth";
 
-export const nextAuthOptions: NextAuthOptions ={
+const nextAuthOptions: NextAuthOptions ={
     secret: process.env.AUTH_SECRET,
     providers: [
         GithubProvider({
@@ -56,3 +56,4 @@ export const nextAuthOptions: NextAuthOptions ={
       },
 }
 
+export default nextAuthOptions;

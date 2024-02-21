@@ -1,7 +1,7 @@
 import { createClient } from "@/prismicio";
 import { asText, asHTML } from "@prismicio/client";
 import { getServerSession } from "next-auth";
-import { nextAuthOptions } from "@/src/app/api/auth/[...nextauth]/authOptions";
+import nextAuthOptions  from "@/src/app/api/auth/[...nextauth]/authOptions";
 import { redirect } from "next/navigation";
 
 import styles from './styles.module.scss'

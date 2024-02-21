@@ -1,6 +1,6 @@
 import { stripe } from "@/src/services/stripe";
 import { getServerSession } from "next-auth";
-import { nextAuthOptions } from "../auth/[...nextauth]/route";
+import  nextAuthOptions  from "../auth/[...nextauth]/authOptions";
 import {collection, query, where, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from "@/src/services/firebase";
 
