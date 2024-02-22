@@ -3144,10 +3144,10 @@ strip-final-newline@^3.0.0:
   resolved "https://registry.npmjs.org/strip-final-newline/-/strip-final-newline-3.0.0.tgz"
   integrity sha512-dOESqjYr96iWYylGObzd39EuNTa5VJxyvVAEm5Jnh7KGo75V43Hk1odPQkNDyXNmUR6k+gEiDVXnjB8HJ3crXw==
 
-stripe@^14.5.0:
-  version "14.5.0"
-  resolved "https://registry.npmjs.org/stripe/-/stripe-14.5.0.tgz"
-  integrity sha512-MTt0P0VYDAj2VZyZMW41AxcXVs9s06EDFIHYat4UUkluJgnBHo4T4E2byPhnxoJCPvdzWBwBLnhWbSOg//VTpA==
+stripe@^14.17.0:
+  version "14.17.0"
+  resolved "https://registry.npmjs.org/stripe/-/stripe-14.17.0.tgz"
+  integrity sha512-iwV5SKoXuRIQFne4twGwiiczOkVW73eE2CKn6ltUKCacDy4SGHBX6kj1/xCV2bzzzQjcVtsh5F1aAbJTmf3tLw==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.11.0"

@@ -2,16 +2,8 @@ import styles from './styles.module.scss'
 import { SubscribeButton } from '../subscribeButton';
 import { stripe } from '@/src/services/stripe';
 
-export async function Hero(){
-/*     const baseurl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://ig-news-psi-ruby.vercel.app'
-    
-    const response = await fetch(`${baseurl}/api/product`, {
-        next: {
-            revalidate: 86400 //24h
-        }
-    })
-    const product = await response.json(); */
 
+async function getProduct(){
     const price = await stripe.prices.retrieve(
         'price_1ODG4DCWzqMkMSNRGKyvn0me'
     )
@@ -23,6 +15,14 @@ export async function Hero(){
         }).format((price.unit_amount as number / 100)),
     }
 
+    return product
+}
+
+
+export async function Hero(){
+
+    const product = await getProduct()
+    
     return(
         <main className={styles.main}>
             <div className={styles.main_content}>

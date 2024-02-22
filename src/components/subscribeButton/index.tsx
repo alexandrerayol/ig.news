@@ -24,11 +24,15 @@ export function SubscribeButton({priceId}:SubscribeButtonProps){
             router.push('/posts')
             return;
         }
+
         try{
-            const baseurl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://ig-news-psi-ruby.vercel.app'
+            const baseurl = process.env.NODE_ENV ===
+             'development' ? 'http://localhost:3000' : 'https://ig-news-psi-ruby.vercel.app';
+
             const response = await fetch(`${baseurl}/api/subscribe`, {
                 method: 'POST',
             })
+
             const data = await response.json(); //recebe session
             const stripe = await getStripeJs() //executa a função loadStripe()
 
