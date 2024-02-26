@@ -7,6 +7,7 @@ import { db } from "@/src/services/firebase";
 
 export async function POST(){
 
+    
         //pega informações sobre o usuário logado
         const session = await getServerSession(nextAuthOptions);
 
@@ -14,27 +15,37 @@ export async function POST(){
         let stripeCustomerid  = ''
 
         //consulta no bd para saber se o usuário possui customerid
-        const userRef = query(collection(db, "users"), where("email", "==", session?.user?.email))
-        const querySnapshot = await getDocs(userRef);
+        try{
+            const userRef = query(collection(db, "users"), where("email", "==", session?.user?.email))
+            const querySnapshot = await getDocs(userRef);
+    
+            querySnapshot.forEach((doc) => {
+                firebaseUserId = doc.id; //captura o id do documento referente ao email autenticado no momento.
+                stripeCustomerid = doc.data().stripe_customer_id;
+              });
+        }catch{
+            console.log('erro durante a consulta no BD')
+        }
 
-        querySnapshot.forEach((doc) => {
-            firebaseUserId = doc.id; //captura o id do documento referente ao email autenticado no momento.
-            stripeCustomerid = doc.data().stripe_customer_id;
-          });
 
         //se não possuir customerid no bd é criado um novo customer no stripe e no bd.
         if(!stripeCustomerid){
-            const stripeCustomer = await stripe.customers.create({
-                email: session?.user?.email as string,
-                name: session?.user?.name as string
-            })
+            try{
+                const stripeCustomer = await stripe.customers.create({
+                    email: session?.user?.email as string,
+                    name: session?.user?.name as string
+                })
+    
+                await updateDoc(doc(db, "users", firebaseUserId), {
+                    stripe_customer_id: stripeCustomer.id
+                })
+    
+                //stripeCustomerid deixa de ser vazio para ter um valor. 
+                stripeCustomerid = stripeCustomer.id;
+            }catch{
+                console.log('erro durante a gravação no BD')
+            }
 
-            await updateDoc(doc(db, "users", firebaseUserId), {
-                stripe_customer_id: stripeCustomer.id
-            })
-
-            //stripeCustomerid deixa de ser vazio para ter um valor. 
-            stripeCustomerid = stripeCustomer.id;
         }
         
         
